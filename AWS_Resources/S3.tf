@@ -9,8 +9,8 @@ resource "aws_s3_bucket" "Giants-bucket" {
 resource "aws_s3_object" "Giants-bucket-obj" {
   bucket = aws_s3_bucket.Giants-bucket.id
   key    = "index.html"
-  source = "${path.module}/web-component/index.html"
-  etag = filemd5("${path.module}/web-component/index.html") 
+  source = "${path.module}/AWS_Resources/Componente_Web/index.html"
+  etag = filemd5("${path.module}/AWS_Resources/Componente_Web/index.html") 
   content_type = "text/html"
 }
 
