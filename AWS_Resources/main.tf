@@ -14,5 +14,5 @@ provider "aws" {
 }
 
 module "InfraAWS" {
-  source = "./AWS_Resources"
+  source = "./modulos"
 }
