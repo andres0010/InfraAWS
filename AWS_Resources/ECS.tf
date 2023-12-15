@@ -5,7 +5,7 @@ resource "aws_ecs_cluster" "my_cluster" {
 
 resource "aws_iam_role" "ecs_execution_role" {
   name = "ecs_execution_role"
-  
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
@@ -47,16 +47,34 @@ resource "aws_ecs_task_definition" "my_task" {
   }])
 }
 
+resource "aws_lb_target_group" "my_target_group" {
+  name        = "my-target-group"
+  port        = var.container_port
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.vpcGeneral.id
+  target_type = "ip" # Ajuste importante para Fargate con awsvpc
+
+  health_check {
+    path     = "/health"
+    port     = var.container_port
+    protocol = "HTTP"
+  }
+}
 resource "aws_ecs_service" "my_service" {
   name            = "my-service"
   cluster         = aws_ecs_cluster.my_cluster.id
   task_definition = aws_ecs_task_definition.my_task.arn
-  desired_count = 2
+  desired_count   = 2
   launch_type     = "FARGATE"
 
   network_configuration {
+<<<<<<< HEAD
+    subnets          = [aws_subnet.subnet_publica_1.id, aws_subnet.subnet_publica_2.id]
+    security_groups  = [aws_security_group.security_group.id]
+=======
     subnets         = [aws_subnet.subnet_publica_1.id, aws_subnet.subnet_publica_2.id]
     security_groups = [aws_security_group.security_group.id]
+>>>>>>> d002787b4b441fd21488c14dd0e5076d42fffbbb
     assign_public_ip = true
   }
 
