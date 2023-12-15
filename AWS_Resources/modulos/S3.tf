@@ -10,7 +10,7 @@ resource "aws_s3_object" "giants-bucket-obj" {
   bucket       = aws_s3_bucket.giants-bucket.id
   key          = "index.html"
   source       = "./index.html"
-  etag         = filemd5("./index.html")
+  etag         = filemd5("./modulos/index.html")
   content_type = "text/html"
 }
 
