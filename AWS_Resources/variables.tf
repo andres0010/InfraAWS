@@ -39,3 +39,8 @@ variable "container_port" {
   type        = number
   default     = 80
 }
+variable "azs" {
+  type        = list(string)
+  description = "Availability Zones"
+  default     = ["us-east-1a", "us-east-1c"]
+}
