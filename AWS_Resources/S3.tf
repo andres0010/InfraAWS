@@ -6,7 +6,6 @@ resource "aws_s3_bucket" "giants-bucket" {
   }
 }
 
-<<<<<<< HEAD
 resource "aws_s3_object" "giants-bucket-obj" {
   bucket       = aws_s3_bucket.giants-bucket.id
   key          = "index.html"
