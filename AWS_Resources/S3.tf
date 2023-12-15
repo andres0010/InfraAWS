@@ -11,13 +11,6 @@ resource "aws_s3_object" "giants-bucket-obj" {
   key          = "index.html"
   source       = "./index.html"
   etag         = filemd5("./index.html")
-=======
-resource "aws_s3_object" "Giants-bucket-obj" {
-  bucket = aws_s3_bucket.Giants-bucket.id
-  key    = "index.html"
-  source = "${path.module}/web-component/index.html"
-  etag = filemd5("${path.module}/web-component/index.html") 
->>>>>>> d002787b4b441fd21488c14dd0e5076d42fffbbb
   content_type = "text/html"
 }
 
