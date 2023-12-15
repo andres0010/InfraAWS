@@ -1,7 +1,7 @@
 variable "region" {
   description = "La región de AWS donde se desplegarán los recursos."
   type        = string
-  default     = "us-east-1" # Cambia según tu región preferida
+  default     = "us-west-1" # Cambia según tu región preferida
 }
 
 variable "vpc_cidr_block" {
@@ -42,5 +42,5 @@ variable "container_port" {
 variable "azs" {
   type        = list(string)
   description = "Availability Zones"
-  default     = ["us-east-1a", "us-east-1c"]
+  default     = ["us-west-1b", "us-west-1c"]
 }

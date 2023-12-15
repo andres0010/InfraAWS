@@ -1,26 +1,26 @@
 
 resource "aws_vpc" "vpcGeneral" {
-  cidr_block = var.vpc_cidr_block
+  cidr_block           = var.vpc_cidr_block
   enable_dns_hostnames = true
-  instance_tenancy = "default"
+  instance_tenancy     = "default"
   tags = {
     Name    = "vpcGeneral"
-    Project = "Proyectovpc"    
+    Project = "Proyectovpc"
   }
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpcGeneral.id
- tags = {
+  tags = {
     Name    = "igw"
     Project = "Proyectovpc"
   }
 }
 
 resource "aws_subnet" "subnet_publica_1" {
-  vpc_id                  = aws_vpc.vpcGeneral.id
-  cidr_block              = var.subnet_cidr_blocks[0]
-  availability_zone       = var.region
+  vpc_id            = aws_vpc.vpcGeneral.id
+  cidr_block        = var.subnet_cidr_blocks[0]
+  availability_zone = "us-west-1b"
   tags = {
     Name    = "subnet_publica_1"
     Project = "Proyectovpc"
@@ -28,9 +28,9 @@ resource "aws_subnet" "subnet_publica_1" {
 }
 
 resource "aws_subnet" "subnet_publica_2" {
-  vpc_id                  = aws_vpc.vpcGeneral.id
-  cidr_block              = var.subnet_cidr_blocks[1]
-  availability_zone       = "us-east-1b" # Cambia según tu región
+  vpc_id            = aws_vpc.vpcGeneral.id
+  cidr_block        = var.subnet_cidr_blocks[1]
+  availability_zone = "us-west-1c" # Cambia según tu región
   tags = {
     Name    = "subnet_publica_2"
     Project = "Proyectovpc"
