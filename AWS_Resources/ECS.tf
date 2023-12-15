@@ -47,19 +47,6 @@ resource "aws_ecs_task_definition" "my_task" {
   }])
 }
 
-resource "aws_lb_target_group" "my_target_group" {
-  name        = "my-target-group"
-  port        = var.container_port
-  protocol    = "HTTP"
-  vpc_id      = aws_vpc.vpcGeneral.id
-  target_type = "ip" # Ajuste importante para Fargate con awsvpc
-
-  health_check {
-    path     = "/health"
-    port     = var.container_port
-    protocol = "HTTP"
-  }
-}
 resource "aws_ecs_service" "my_service" {
   name            = "my-service"
   cluster         = aws_ecs_cluster.my_cluster.id
