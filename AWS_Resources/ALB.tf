@@ -8,11 +8,11 @@ resource "aws_lb" "my_lb" {
 }
 
 resource "aws_lb_target_group" "my_target_group" {
-  name     = "my-target-group"
-  port     = var.container_port
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.vpcGeneral.id
-  target_type = "ip"  # Ajuste importante para Fargate con awsvpc
+  name        = "my-target-group"
+  port        = var.container_port
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.vpcGeneral.id
+  target_type = "ip" # Ajuste importante para Fargate con awsvpc
 
   health_check {
     path     = "/health"
