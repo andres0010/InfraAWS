@@ -6,8 +6,8 @@ resource "aws_s3_bucket" "giants-bucket" {
   }
 }
 
-resource "aws_dynamodb_table" "terraform.lock" {
-  name = "terraform.lock"
+resource "aws_dynamodb_table" "terraform-lock" {
+  name = "terraform-lock"
   read_capacity = 5
   write_capacity = 5
   hash_key = "lockID"
