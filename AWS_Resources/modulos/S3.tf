@@ -1,13 +1,13 @@
-resource "aws_s3_bucket" "giants-bucket" {
-  bucket = "giants-bucket"
+resource "aws_s3_bucket" "giants-bucket1" {
+  bucket = "giants-bucket1"
 
   tags = {
-    Name = "giants-bucket"
+    Name = "giants-bucket1"
   }
 }
 
-resource "aws_s3_object" "giants-bucket-obj" {
-  bucket       = aws_s3_bucket.giants-bucket.id
+resource "aws_s3_object" "giants-bucket1-obj" {
+  bucket       = aws_s3_bucket.giants-bucket1.id
   key          = "index.html"
   source       = "./modulos/index.html"
   etag         = filemd5("./modulos/index.html")
@@ -18,7 +18,7 @@ resource "aws_s3_object" "giants-bucket-obj" {
 data "aws_iam_policy_document" "s3_policy" {
   statement {
     actions   = ["s3:GetObject"]
-    resources = ["${aws_s3_bucket.giants-bucket.arn}/*"]
+    resources = ["${aws_s3_bucket.giants-bucket1.arn}/*"]
 
     principals {
       type        = "AWS"
@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "s3_policy" {
 }
 
 resource "aws_s3_bucket_policy" "giants-policy" {
-  bucket = aws_s3_bucket.giants-bucket.id
+  bucket = aws_s3_bucket.giants-bucket1.id
   policy = data.aws_iam_policy_document.s3_policy.json
 }
 
@@ -40,8 +40,8 @@ resource "aws_cloudfront_origin_access_identity" "s3_origin_access_identity" {
 // CloudFront Distribution
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = aws_s3_bucket.giants-bucket.bucket_regional_domain_name
-    origin_id   = aws_s3_bucket.giants-bucket.id
+    domain_name = aws_s3_bucket.giants-bucket1.bucket_regional_domain_name
+    origin_id   = aws_s3_bucket.giants-bucket1.id
 
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.s3_origin_access_identity.cloudfront_access_identity_path
@@ -56,7 +56,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = aws_s3_bucket.giants-bucket.id
+    target_origin_id = aws_s3_bucket.giants-bucket1.id
 
     cache_policy_id        = "658327ea-f89d-4fab-a63d-7e88639e58f6"
     viewer_protocol_policy = "allow-all"

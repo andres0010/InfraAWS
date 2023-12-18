@@ -31,7 +31,7 @@ variable "task_family" {
 variable "container_image" {
   description = "Imagen del contenedor para la tarea ECS."
   type        = string
-  default     = "nginx:stable-alpine3.17"
+  default     = "paitopossu/proyecto:final"
 }
 
 variable "container_port" {
