@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
     bucket = "giants-bucket"
-    key = "terraform.tfstate"
+    key    = "terraform.tfstate"
     region = "us-west-1"
-    
+
   }
 
   required_version = ">=0.13.0"
