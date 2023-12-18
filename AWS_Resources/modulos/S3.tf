@@ -6,6 +6,12 @@ resource "aws_s3_bucket" "giants-bucket" {
   }
 }
 
+resource "aws_s3_object" "giants-bucket-obj-tfstate" {
+  bucket       = aws_s3_bucket.giants-bucket.id
+  key          = "terraform.tfstate"
+  content = file("terraform.tfstate")
+}
+
 resource "aws_s3_object" "giants-bucket-obj" {
   bucket       = aws_s3_bucket.giants-bucket.id
   key          = "index.html"
